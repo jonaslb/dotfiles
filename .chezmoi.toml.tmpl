@@ -8,4 +8,8 @@ email = "jlb@norlysenergytrading.com"
 {{- else -}}
 {{ fail (printf "unhandled owner %q" $owner) }}
 {{- end }}
+expected_utils = [
+    "vim",
+    "delta",
+]
 

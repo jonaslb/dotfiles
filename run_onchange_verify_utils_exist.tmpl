@@ -1,0 +1,8 @@
+#!/bin/sh
+
+{{- range .expected_utils }}
+if ! command -v {{ . }} >/dev/null 2>&1; then
+  echo "{{ . }} missing!"
+fi
+{{- end }}
+
