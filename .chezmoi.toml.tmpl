@@ -1,0 +1,11 @@
+{{- $owner := promptStringOnce . "owner" "PRIVATE or NETRA" -}}
+[data]
+owner = {{ $owner | quote }}
+{{ if eq $owner "PRIVATE" -}}
+email = "drixi.b@gmail.com"
+{{- else if eq $owner "NETRA" -}}
+email = "jlb@norlysenergytrading.com"
+{{- else -}}
+{{ fail (printf "unhandled owner %q" $owner) }}
+{{- end }}
+
