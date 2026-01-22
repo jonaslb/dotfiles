@@ -5,6 +5,7 @@ end
 gabbr gco checkout
 gabbr gc commit
 gabbr gst status
+gabbr gsw switch
 gabbr gl log
 gabbr gps push
 gabbr gpl pull
