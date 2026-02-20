@@ -1,13 +1,18 @@
-# Python Project Hints
+# Universal Agent Guidance
 
-## General
+Main guidance focuses on Python, but advice given may apply "in spirit" regardless of language.
+
+## Python Project Hints
+
+### General
 
 - Assume usage of `uv` to run project commands like pytest, ruff, etc. Unless the project instructions indicate otherwise.
 - Use all Python's modern typing features: `str | None` instead of `Optional[str]`, `list[T]` instead of `List[T]`, and `class X[T]` instead of `class X(Generic[T])`, etc. IF pyproject.py lists a modern enough Python, of course.
 - Use `object` over `Any` if dynamic typing required. Use asserts or isinstance checks for type narrowing (or, if reusability is desired, a TypeGuard).
+- Prefer immutability whenever possible and practical. Ideally only "builder"-style objects mutate themselves - eventually they "build" to a final type and then are immutable. Classes not written anew, or which have other special circumstances, may not follow this pattern. In that case follow existing practice or whichever is necessary.
 - Hints for Pydantic and FastAPI below can oftentimes generalize in spirit for other libraries.
 
-## Pydantic
+### Pydantic
 
 - Use `var: Annotated[T, Field(...)]` over `var: T = Field(...)`. Then use classical ` = default_value` for defaults.
 - Put any field description in a docstring immediately below the field instead of inside `Field(..)`.
@@ -33,7 +38,7 @@
         ]
     ```
 
-## FastAPI
+### FastAPI
 
 - Prefer relying on return type annotations for responses; avoid explicit `response_model=...` unless necessary.
 - Use `status: Annotated[list[RunStatus] | None, Query()] = None` rather than `status: list[RunStatus] | None = Query(default=None)`. This goes for other annotations like `Body()` as well.
