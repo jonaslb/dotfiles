@@ -45,3 +45,9 @@ Main guidance focuses on Python, but advice given may apply "in spirit" regardle
 - Always require timezone information for inputs in public APIs. Raise an error explicitly instead of relying on `tz_convert` failing. Convert the provided datetimes to UTC ASAP.
 - External (to the project) APIs may use timezone-naive objects. Convert these to UTC and ensure they carry timezone information ASAP. To this end, you may assume that naive timestamps are UTC, unless explicitly known/documented otherwise for a given API.
 
+### Shell (bash, fish, etc)
+
+Shell scripts should be highly defensive against unexpected user configurations - directories or files not existing, etc.
+Scripts intended for environment inclusion must not error when executed to define functions, source other files, etc.
+When a user command is run, it must "fail fast".
+
