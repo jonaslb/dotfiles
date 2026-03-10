@@ -51,3 +51,9 @@ Shell scripts should be highly defensive against unexpected user configurations 
 Scripts intended for environment inclusion must not error when executed to define functions, source other files, etc.
 When a user command is run, it must "fail fast".
 
+### Git
+
+A fish utility `wt` is present for working with git worktrees.
+Specifically, `wt new <branch>` creates `base/project/<branch>` on a new branch off main.
+Also available is `wt co` (checkout existing branch as with new), `wt convert` (normal git repo to worktree layout), `wt update`, and `wt help`.
+
