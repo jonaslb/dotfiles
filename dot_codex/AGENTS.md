@@ -12,6 +12,8 @@ Main guidance focuses on Python, but advice given may apply "in spirit" regardle
 - Prefer immutability whenever possible and practical. Ideally only "builder"-style objects mutate themselves - eventually they "build" to a final type and then are immutable. Classes not written anew, or which have other special circumstances, may not follow this pattern. In that case follow existing practice or whichever is necessary.
 - Hints for Pydantic and FastAPI below can oftentimes generalize in spirit for other libraries.
 - Avoid creating simple functions with long names that "hide" fluent API usage inside (at least, if it is not _very_ long). The fluent API is usually easier to understand directly.
+- Heresy: The "javaism" of defining everything as a constant before usage. Please prefer inline literals, at least when reusability of that particular variable is not an explicity goal.
+- Intention in type hints: Do not use `cast(..)` to circumvent type checking, only use it if we "know" that a type is narrower than the checker otherwise infers. If the type checker is wrong because some library type annotations are wrong, a `# type: ignore` is more appropriate.
 
 ### Pydantic
 
