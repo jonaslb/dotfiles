@@ -48,13 +48,22 @@ Main guidance focuses on Python, but advice given may apply "in spirit" regardle
 - Always require timezone information for inputs in public APIs. Raise an error explicitly instead of relying on `tz_convert` failing. Convert the provided datetimes to UTC ASAP.
 - External (to the project) APIs may use timezone-naive objects. Convert these to UTC and ensure they carry timezone information ASAP. To this end, you may assume that naive timestamps are UTC, unless explicitly known/documented otherwise for a given API.
 
-### Shell (bash, fish, etc)
+### Type check Failures (mypy, pyrefly, ty, ..)
+
+Try to avoid making runtime changes to fix type errors, unless it is something like an exhaustiveness/narrowing check that only requires a branch.
+Try to annotate correct types instead.
+If the cause is missing or poor type hints in a library, it may be that we should add a "stubs" or "types" library to dev dependencies. This is done like `uv add --dev pandas-stubs`, for example.
+As a final fallback, a type ignore comment might be necessary, but should be used sparingly.
+In the end, type information should be used to "reinforce" the stability of code correctness in the face of future (possibly not fully informed) changes, and that is only possible with as few as possible "type overrides".
+We should also not use inferior solutions like converting an array to a list just because the typing is easier.
+
+## Shell (bash, fish, etc)
 
 Shell scripts should be highly defensive against unexpected user configurations - directories or files not existing, etc.
 Scripts intended for environment inclusion must not error when executed to define functions, source other files, etc.
 When a user command is run, it must "fail fast".
 
-### Git
+## Git
 
 A fish utility `wt` is present for working with git worktrees.
 Specifically, `wt new <branch>` creates `base/project/<branch>` on a new branch off main.
