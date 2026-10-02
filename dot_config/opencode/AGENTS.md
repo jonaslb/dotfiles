@@ -11,10 +11,6 @@ Guidance is Python-focused but generally applicable.
 ## Python
 
 - Use `uv` for project commands unless project instructions say otherwise.
-- Use modern typing supported by the project:
-  - `str | None`, not `Optional[str]`
-  - `list[T]`, not `List[T]`
-  - `class X[T]`, not `Generic[T]`
 - Prefer `object` over `Any`; narrow with `assert`, `isinstance`, or reusable `TypeGuard`.
 - Prefer immutability where practical. Follow established patterns in existing code.
 - Prefer clear fluent API usage over long wrapper functions.
