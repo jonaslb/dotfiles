@@ -38,6 +38,16 @@ Guidance is Python-focused but generally applicable.
 - Use targeted ignores only as a last resort.
 - Do not choose an inferior runtime representation merely because it is easier to type.
 
+## Tests
+
+Before finishing, critically review any tests you wrote or touched:
+
+- Use minimal data and keep tests fast while still covering the intended invariants.
+- Assert invariant behavior, not specific configuration values.
+- Avoid combining parameterizations unless each combination covers something distinct.
+- Prefer fewer, shorter tests with stronger assertions over many narrow ones.
+- Cover specified behavior for realistic use cases; do not fuzz unless asked.
+
 ## Shell
 
 - Write defensive shell scripts that tolerate missing optional files and unexpected user configuration.
