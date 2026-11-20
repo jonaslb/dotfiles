@@ -1,7 +1,5 @@
 # Universal Agent Guidance
 
-Guidance is Python-focused but generally applicable.
-
 ## External Outreach
 
 - For requested MRs, comments, and similar actions, use neutral, factual language and end with:
@@ -22,10 +20,10 @@ Most checkouts use the `wt` worktree-catalogue layout (the fish function `wt`, i
 `~/.config/fish/functions/wt.fish`):
 
 ```text
-~/top/path/project-name/  # project folder; not itself a git checkout
-├── .bare/                # the bare repository
-├── project-name/         # main-branch worktree, named after the project
-└── <branch>/             # one worktree per other branch
+~/netra/fc/kassandra-api/      # project folder; not itself a git checkout
+├── .bare/                     # the bare repository
+├── kassandra-api/             # main-branch worktree, named after the project
+└── <branch>/                  # one worktree per other branch
 ```
 
 - A `.bare` folder in a parent directory identifies this layout. Run git commands inside a worktree, not in the
@@ -45,11 +43,6 @@ Most checkouts use the `wt` worktree-catalogue layout (the fish function `wt`, i
 - Inline single-use literals instead of defining unnecessary constants.
 - Use `cast()` only when the runtime type is genuinely known to be narrower. For incorrect library stubs, prefer a targeted `# type: ignore`.
 - A git tag of an internal package isn't a release. Before locking a new version, confirm it is on the package index.
-
-## Pydantic
-
-- Prefer `Annotated[T, Field(...)]`; assign defaults normally.
-- Put field descriptions in docstrings, except when `Field(description=...)` is needed for generated API documentation.
 - Avoid implicitly coupled fields. Prefer explicit tagged/discriminated unions.
 
 ## FastAPI
@@ -122,13 +115,18 @@ tests you wrote or touched:
 When delegating to subagents:
 
 - Choose the model by role:
-  - `openai/gpt-6-astra`: architecture and hard analysis.
-  - `openai/gpt-6.1-sol`: implementation.
+  - `github-copilot/gpt-6.2-astra`: Reviews that focus on correctness in difficult, ambiguous or simply large-scale situations.
+  - `github-copilot/gpt-6.2-sol`: general implementation work.
+  - `github-copilot/gemini-4-hydrogen`: practical work, simple/near-mechanical implementations.
   - `openai/gpt-6-luna`: exploration, and summarizing large amounts of text.
-  - `github-copilot/claude-opus-5.5`: critical review, and prose in general (MR descriptions, reports, docs,
-    messages).
+  - `github-copilot/gemini-4-neon`: For documentation and prose in general (MR descriptions, reports, docs, messages).
 - Keep tasks small: one narrow, verifiable deliverable per subagent that returns quickly. The parent can then
   change direction between these small loops. Several short rounds are better than one long autonomous task.
 - `explore` agents have no shell. Use `general` for anything that needs git, glab, uv or network access.
 - Give every task its exact worktree and package root, deliverable, constraints and limits. The
   `delegated-work` skill has a brief template and the coordination conventions.
+
+## Harness output
+
+The renderer of your harness supports markdown, but not inline tex-math. Use unicode math instead if needed.
+
